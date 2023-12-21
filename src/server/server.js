@@ -17,12 +17,6 @@ app.get('/', async (req, res) => {
     res.status(200).json({ message: 'Hello' })
 })
 
-app.post('/', async (req, res) => {
-    // collection = await db.collection("products")
-   // const result = await collection.insertMany({name: 'Nelson'})
-    res.status(204)
-})
-
 app.listen(app.get('port'), () => {
     console.log('Server on port', app.get('port'))
 })
