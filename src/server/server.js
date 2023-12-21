@@ -1,4 +1,5 @@
 import express from 'express'
+import '../db/connection.mjs'
 
 const app = express();
 const SERVER_PORT = 3000
