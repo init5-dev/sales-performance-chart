@@ -11,8 +11,7 @@ import {
 } from '../mocks/mock'
 import { Box, Select, MenuItem, InputLabel, FormControl } from '@mui/material'
 
-const SelectionBar = ({updateChart}) => {
-
+const SelectionBar = ({ updateChart }) => {
   const [categories, setCategories] = useState(getCategoriesNames())
   const [category, setCategory] = useState(categories[0])
 
@@ -58,8 +57,8 @@ const SelectionBar = ({updateChart}) => {
   }
 
   return (
-    <Stack>
-      <FormControl fullWidth>
+    <Stack direction='row' spacing={2} alignContent='center' justifyContent='center'>
+      <FormControl sx={{ width: '250px' }}>
         <InputLabel id={`categories-label`}>Categoría</InputLabel>
         <Select
           labelId={`categories-label`}
@@ -76,8 +75,8 @@ const SelectionBar = ({updateChart}) => {
             ))}
         </Select>
       </FormControl>
-      <FormControl fullWidth>
-        <InputLabel id={`products-label`}>Categoría</InputLabel>
+      <FormControl sx={{ width: '250px' }}>
+        <InputLabel id={`products-label`}>Producto</InputLabel>
         <Select
           labelId={`products-label`}
           id={'product'}
@@ -93,8 +92,8 @@ const SelectionBar = ({updateChart}) => {
             ))}
         </Select>
       </FormControl>
-      <FormControl fullWidth>
-        <InputLabel id={`brands-label`}>Categoría</InputLabel>
+      <FormControl sx={{ width: '250px' }}>
+        <InputLabel id={`brands-label`}>Marca</InputLabel>
         <Select
           labelId={`brands-label`}
           id={'brand'}
