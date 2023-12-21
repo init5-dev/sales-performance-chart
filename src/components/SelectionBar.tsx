@@ -1,18 +1,17 @@
 import React, { useContext } from 'react'
 import { useEffect, useState } from 'react'
 import { Stack } from '@mui/material'
-import Selector from './Selector'
 import {
+  formatMonthlySales,
   getBrandsNames,
   getCategoriesNames,
+  getMonthlySales,
   getProductByName,
   getProductsNames
 } from '../mocks/mock'
-import ChartContext from '../stores/context'
 import { Box, Select, MenuItem, InputLabel, FormControl } from '@mui/material'
 
-const SelectionBar = () => {
-  const state = useContext(ChartContext)
+const SelectionBar = ({updateChart}) => {
 
   const [categories, setCategories] = useState(getCategoriesNames())
   const [category, setCategory] = useState(categories[0])
@@ -24,9 +23,13 @@ const SelectionBar = () => {
   const [brand, setBrand] = useState(brands[0])
 
   useEffect(() => {
+    const results = formatMonthlySales(brand)
+    updateChart(results)
+  }, [brand])
+
+  useEffect(() => {
     setProducts(getProductsNames(category))
     setProduct(products[0])
-    console.log('CAT CHANG')
   }, [category])
 
   useEffect(() => {

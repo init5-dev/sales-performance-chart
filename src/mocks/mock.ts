@@ -61,3 +61,30 @@ export const getBrandByName = (name) => {
 
   return undefined
 }
+
+export const getMonthlySales = (brandName) => {
+  const brand = getBrandByName(brandName)
+
+  if (brand) {
+    return brand.monthly_sales
+  }
+
+  return undefined
+}
+
+export const formatMonthlySales = (brand) => {
+  const monthlySales = getMonthlySales(brand)
+
+    const results = monthlySales?.map((sales, index) => {
+      const month = new Date(2022, index - 1, 1).toLocaleString('es-ES', {
+        month: 'long'
+      })
+
+      return {
+        month,
+        sales
+      }
+    })
+
+    return results
+}
