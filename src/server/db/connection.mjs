@@ -1,5 +1,6 @@
 
 import dotenv from 'dotenv'
+import process from "process"
 import { MongoClient, ServerApiVersion } from 'mongodb'
 
 dotenv.config()
@@ -19,13 +20,19 @@ const client = new MongoClient(URI, {
   }
 });
 
-async function run() {
-  try {
-    await client.connect();
-    await client.db("admin").command({ ping: 1 });
-    console.log("Pinged your deployment. You successfully connected to MongoDB!");
-  } finally {
-    await client.close();
-  }
+// Establish connection
+
+let conn;
+
+try {
+  conn = await client.connect();
+  await client.db("admin").command({ ping: 1 });
+  console.log("Pinged your deployment. You successfully connected to MongoDB!");
+} catch (e) {
+  console.error(e);
 }
-run().catch(console.dir);
+
+const db = conn.db("sales_db");
+console.log(db)
+
+export default db;

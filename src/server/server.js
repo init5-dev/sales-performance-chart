@@ -1,15 +1,28 @@
 import express from 'express'
-import '../db/connection.mjs'
+import db from './db/connection.mjs'
 
-const app = express();
+const app = express()
 const SERVER_PORT = 3000
 
-app.set('port', SERVER_PORT);
+app.set('port', SERVER_PORT)
 
 // Middlewares
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+
+app.get('/', async (req, res) => {
+    const collection = await db.collection("products")
+    const data = await collection.find({}).toArray()
+    console.log(data)
+    res.status(200).json({ message: 'Hello' })
+})
+
+app.post('/', async (req, res) => {
+    // collection = await db.collection("products")
+   // const result = await collection.insertMany({name: 'Nelson'})
+    res.status(204)
+})
 
 app.listen(app.get('port'), () => {
-    console.log('Server on port', app.get('port'));
-});
+    console.log('Server on port', app.get('port'))
+})
